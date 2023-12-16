@@ -40,15 +40,20 @@ bool PyramicBoard::update_board(int x, int y, char mark) {
 
 bool PyramicBoard::isvalid(int x, int y) {
     // Check if the coordinates are within the bounds of the board
-    if (x < 0 || x >= n_rows || y < 0 || y >= n_cols||(x==0&&y!=2)||(x==1&&(y==0||y==4))) {
+    if (x < 0 || x >= n_rows || y < 0 || y >= n_cols) {
         return false;
     }
-
+ 
     // Check if the cell at those coordinates is empty
     if (board[x][y] != 0) {
         return false;
     }
-
+ 
+    // Check for restricted cells
+    if ((x == 0 && y != 2) || (x == 1 && (y == 0 || y == 4))) {
+        return false;
+    }
+ 
     return true;
 }
 
